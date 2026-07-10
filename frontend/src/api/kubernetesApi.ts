@@ -32,9 +32,9 @@ export const generateKubernetes = async (
   request: KubernetesRequest
 ): Promise<KubernetesResponse> => {
   const response = await axios.post(
-    "http://localhost:8000/kubernetes/generate",
-    request
-  );
+  `${import.meta.env.VITE_API_URL}/kubernetes/generate`,
+  request
+);
 
   return response.data;
 };
