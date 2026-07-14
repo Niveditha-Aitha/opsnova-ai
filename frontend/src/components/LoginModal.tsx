@@ -35,8 +35,6 @@ function LoginModal({
   // -------------------------------
 
   const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
-  const [designation, setDesignation] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // -------------------------------
@@ -63,8 +61,6 @@ function LoginModal({
     setPassword("");
 
     setName("");
-    setCompany("");
-    setDesignation("");
 
     setConfirmPassword("");
 
