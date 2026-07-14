@@ -9,8 +9,7 @@ import {
 } from "../../api/troubleshooterApi";
 
 type WorkspaceProps = {
-  onRequireLogin: () => void;
-};
+  onRequireLogin: () => void;};
 function TroubleshooterWorkspace({
   onRequireLogin,
 }: WorkspaceProps) {
