@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { getUser } from "./services/authService";
+
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import Vault from "./pages/Vault";
@@ -29,6 +31,7 @@ function App() {
   useState<VaultItem | null>(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showAI, setShowAI] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(getUser());
 
   useEffect(() => {
   const params = new URLSearchParams(window.location.search);
@@ -104,6 +107,7 @@ function App() {
   onVault={() => setCurrentPage("vault")}
   onHome={() => setCurrentPage("home")}
   onLogin={() => setShowLoginModal(true)}
+  loggedInUser={loggedInUser}
 />
 
 {showAI && (
@@ -170,6 +174,9 @@ function App() {
      <LoginModal
   isOpen={showLoginModal}
   onClose={() => setShowLoginModal(false)}
+  onLoginSuccess={() => {
+    setLoggedInUser(getUser());
+  }}
 />
 
 <AIChatButton

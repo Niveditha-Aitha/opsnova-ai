@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { login, register } from "../auth/authService";
+import {
+  login,
+  register,
+} from "../api/authApi";
+import { saveLogin } from "../services/authService";
 
 type LoginModalProps = {
   isOpen: boolean;
   onClose: () => void;
+   onLoginSuccess: () => void;
 };
 
 function LoginModal({
   isOpen,
   onClose,
+  onLoginSuccess,
 }: LoginModalProps) {
 
   // -------------------------------
@@ -73,57 +79,51 @@ function LoginModal({
   // Register Validation
   // -------------------------------
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
 
-    setMessage("");
+  setMessage("");
 
-    if (!name.trim()) {
-      setIsError(true);
-      setMessage("Please enter your full name.");
-      return;
-    }
+  if (!name.trim()) {
+    setIsError(true);
+    setMessage("Please enter your full name.");
+    return;
+  }
 
-    if (!email.trim()) {
-      setIsError(true);
-      setMessage("Please enter your email.");
-      return;
-    }
+  if (!email.trim()) {
+    setIsError(true);
+    setMessage("Please enter your email.");
+    return;
+  }
 
-    if (!password.trim()) {
-      setIsError(true);
-      setMessage("Please enter your password.");
-      return;
-    }
+  if (!password.trim()) {
+    setIsError(true);
+    setMessage("Please enter your password.");
+    return;
+  }
 
-    if (password.length < 8) {
-      setIsError(true);
-      setMessage("Password must contain at least 8 characters.");
-      return;
-    }
+  if (password.length < 8) {
+    setIsError(true);
+    setMessage("Password must contain at least 8 characters.");
+    return;
+  }
 
-    if (password !== confirmPassword) {
-      setIsError(true);
-      setMessage("Passwords do not match.");
-      return;
-    }
+  if (password !== confirmPassword) {
+    setIsError(true);
+    setMessage("Passwords do not match.");
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
 
-    const result = register({
+  try {
+
+    await register({
       name,
       email,
       password,
-      company,
-      designation,
     });
 
     setLoading(false);
-
-    if (!result.success) {
-      setIsError(true);
-      setMessage(result.message);
-      return;
-    }
 
     setIsError(false);
 
@@ -139,13 +139,27 @@ function LoginModal({
 
     }, 1200);
 
-  };
+  } catch (error: any) {
+
+    setLoading(false);
+
+    setIsError(true);
+
+    if (error.response?.data?.detail) {
+      setMessage(error.response.data.detail);
+    } else {
+      setMessage("Registration failed.");
+    }
+
+  }
+
+};
 
   // -------------------------------
   // Login Handler
   // -------------------------------
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
 
   setMessage("");
 
@@ -163,36 +177,47 @@ function LoginModal({
 
   setLoading(true);
 
-  const result = login({
-    email,
-    password,
-  });
+  try {
 
-  setLoading(false);
+    const result = await login({
+      email,
+      password,
+    });
 
-  if (!result.success) {
+    saveLogin(result);
+
+    setLoading(false);
+
+    setIsError(false);
+
+    setMessage("Login successful.");
+
+    onLoginSuccess();
+
+    setTimeout(() => {
+
+      clearForm();
+
+      onClose();
+
+    }, 1000);
+
+  } catch {
+
+    setLoading(false);
+
     setIsError(true);
-    setMessage(result.message);
-    return;
+
+    setMessage("Invalid email or password.");
+
   }
-
-  setIsError(false);
-  setMessage("Login successful. Redirecting...");
-
-  setTimeout(() => {
-
-    clearForm();
-
-    onClose();
-
-  }, 1000);
 
 };
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
 
-      <div className="relative w-full max-w-md rounded-3xl border border-slate-700 bg-slate-900/95 p-8 shadow-2xl">
+      <div className="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-3xl bg-slate-900 p-8">
 
         {/* Close */}
 
@@ -266,38 +291,6 @@ function LoginModal({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter Your Full Name"
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:border-blue-500"
-              />
-
-            </div>
-
-            <div className="mb-4">
-
-              <label className="mb-2 block text-sm text-slate-300">
-                Company
-              </label>
-
-              <input
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                placeholder="Enter your Company Name"
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:border-blue-500"
-              />
-
-            </div>
-
-            <div className="mb-4">
-
-              <label className="mb-2 block text-sm text-slate-300">
-                Designation
-              </label>
-
-              <input
-                value={designation}
-                onChange={(e) =>
-                  setDesignation(e.target.value)
-                }
-                placeholder="Enter Your Designation"
                 className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:border-blue-500"
               />
 

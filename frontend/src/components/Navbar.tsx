@@ -1,5 +1,6 @@
 
 import GitHubLogin from "./github/GitHubLogin";
+import UserMenu from "./UserMenu";
 
 type NavbarProps = {
   onSearch: (value: string) => void;
@@ -7,6 +8,11 @@ type NavbarProps = {
   onHome: () => void;
   onVault: () => void;
   onLogin: () => void;
+  loggedInUser: {
+    id: number;
+    name: string;
+    email: string;
+  } | null;
 };
 
 function Navbar({
@@ -15,6 +21,7 @@ function Navbar({
   onDashboard,
   onHome,
   onLogin,
+  loggedInUser,
 }: NavbarProps) {
   
 
@@ -77,13 +84,21 @@ function Navbar({
 >
   🧰 Vault
 </button>
-
-            <button
-  onClick={onLogin}
-  className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-2.5 text-base font-semibold text-white transition-all duration-300 hover:shadow-lg"
->
-  🔐 Login
-</button>
+{loggedInUser ? (
+  <UserMenu
+    user={loggedInUser}
+    onLogout={() => {
+      window.location.reload();
+    }}
+  />
+) : (
+  <button
+    onClick={onLogin}
+    className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-2.5 text-base font-semibold text-white transition-all duration-300 hover:shadow-lg"
+  >
+    🔐 Login
+  </button>
+)}
 
           </div>
         </div>

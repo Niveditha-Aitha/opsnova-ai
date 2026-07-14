@@ -12,12 +12,18 @@ from app.api.linux_api import router as linux_router
 from app.api.troubleshooter_api import router as troubleshooter_router
 from app.api.chat.chat_router import router as chat_router
 from app.api.github.github_router import router as github_router
+from app.database.database import Base
+from app.database.database import engine
+from app.auth.router import router as auth_router
 
+from app.models.user import User
 
 app = FastAPI(
     title="OpsNova AI API",
     version="1.0.0"
 )
+
+Base.metadata.create_all(bind=engine)
 
 origins = [
     "http://localhost:5173",
@@ -32,6 +38,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth_router)
 app.include_router(docker_router)
 app.include_router(kubernetes_router)
 app.include_router(jenkins_router)
