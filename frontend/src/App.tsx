@@ -12,6 +12,7 @@ import LoginModal from "./components/LoginModal";
 import AIChatButton from "./components/chat/AIChatButton";
 import AIChatPanel from "./components/chat/AIChatPanel";
 import GitHub from "./pages/GitHub";
+import DockerWorkspace from "./features/docker/DockerWorkspace";
 
 import DockerInfo from "./pages/experts/DockerInfo";
 import KubernetesInfo from "./pages/experts/KubernetesInfo";
@@ -151,7 +152,17 @@ function App() {
     <GitHub />
 )}
 
-      {currentPage === "docker-info" && <DockerInfo />}
+      {currentPage === "docker-info" && (
+  <DockerInfo
+    onLaunch={() => setCurrentPage("docker-workspace")}
+  />
+)}
+
+      {currentPage === "docker-workspace" && (
+  <DockerWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+  />
+)}
 
       {currentPage === "kubernetes-info" && <KubernetesInfo />}
 

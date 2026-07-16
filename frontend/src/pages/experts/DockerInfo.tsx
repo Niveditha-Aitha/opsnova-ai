@@ -2,7 +2,13 @@
 import { useRef } from "react";
 import DockerWorkspace from "../../features/docker/DockerWorkspace";
 
-function DockerInfo() {
+type DockerInfoProps = {
+  onLaunch: () => void;
+};
+
+function DockerInfo({
+  onLaunch,
+}: DockerInfoProps) {
 
   const workspaceRef = useRef<HTMLDivElement>(null);
 
@@ -255,7 +261,7 @@ const handleLaunch = () => {
         </p>
 
         <button
-  onClick={handleLaunch}
+  onClick={onLaunch}
   className="mt-10 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-lg font-semibold transition hover:scale-105"
 >
   🚀 Launch Docker Expert
