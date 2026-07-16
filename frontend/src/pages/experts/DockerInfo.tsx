@@ -1,4 +1,18 @@
+
+import { useRef } from "react";
+import DockerWorkspace from "../../features/docker/DockerWorkspace";
+
 function DockerInfo() {
+
+  const workspaceRef = useRef<HTMLDivElement>(null);
+
+const handleLaunch = () => {
+  workspaceRef.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+};
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
 
@@ -240,11 +254,22 @@ function DockerInfo() {
           Docker Compose files and .dockerignore instantly.
         </p>
 
-        <button className="mt-10 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-lg font-semibold transition hover:scale-105">
-          🚀 Launch Docker Expert
-        </button>
+        <button
+  onClick={handleLaunch}
+  className="mt-10 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-lg font-semibold transition hover:scale-105"
+>
+  🚀 Launch Docker Expert
+</button>
 
       </section>
+
+      <div ref={workspaceRef} className="mt-16">
+  <DockerWorkspace
+    onRequireLogin={() => {
+      alert("Please login to generate Docker files.");
+    }}
+  />
+</div>
 
     </main>
   );
