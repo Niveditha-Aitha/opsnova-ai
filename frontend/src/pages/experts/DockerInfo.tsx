@@ -12,14 +12,7 @@ function DockerInfo({
 
   const workspaceRef = useRef<HTMLDivElement>(null);
 
-const handleLaunch = () => {
-  workspaceRef.current?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-};
-
-  return (
+ return (
     <main className="min-h-screen bg-slate-950 text-white">
 
       {/* Hero */}
