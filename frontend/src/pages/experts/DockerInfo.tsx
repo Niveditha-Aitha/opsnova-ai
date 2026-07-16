@@ -1,6 +1,4 @@
 
-import { useRef } from "react";
-import DockerWorkspace from "../../features/docker/DockerWorkspace";
 
 type DockerInfoProps = {
   onLaunch: () => void;
@@ -10,7 +8,6 @@ function DockerInfo({
   onLaunch,
 }: DockerInfoProps) {
 
-  const workspaceRef = useRef<HTMLDivElement>(null);
 
  return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -261,14 +258,6 @@ function DockerInfo({
 </button>
 
       </section>
-
-      <div ref={workspaceRef} className="mt-16">
-  <DockerWorkspace
-    onRequireLogin={() => {
-      alert("Please login to generate Docker files.");
-    }}
-  />
-</div>
 
     </main>
   );
