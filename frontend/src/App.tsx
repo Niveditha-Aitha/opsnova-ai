@@ -53,6 +53,12 @@ function App() {
   }
 }, []);
 
+useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: "auto",
+  });
+}, [currentPage]);
 
   const openExpert = (expert: string) => {
     switch (expert) {
