@@ -1,7 +1,24 @@
-function AwsInfo() {
-  return (
+type AwsInfoProps = {
+  onLaunch: () => void;
+  onBack: () => void;
+};
+
+function AwsInfo({
+  onLaunch,
+  onBack,
+}: AwsInfoProps) {
+
+  return(
     <main className="min-h-screen bg-slate-950 text-white">
 
+<div className="mb-8">
+  <button
+    onClick={onBack}
+    className="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-white transition hover:bg-slate-700"
+  >
+    ← Back to Home
+  </button>
+</div>
       {/* Hero */}
 
       <section className="mx-auto max-w-7xl px-8 pt-16">
@@ -249,6 +266,27 @@ function AwsInfo() {
 
         </div>
 
+{/* Launch */}
+
+<section className="mx-auto mt-16 mb-20 max-w-6xl rounded-3xl border border-blue-500 bg-slate-900 p-10 text-center">
+
+  <h2 className="text-3xl font-bold">
+    Ready to Generate AWS Infrastructure?
+  </h2>
+
+  <p className="mt-5 text-slate-400">
+    Launch the AWS Expert to generate cloud infrastructure templates,
+    networking configurations, IAM policies, and deployment resources instantly.
+  </p>
+
+  <button
+    onClick={onLaunch}
+    className="mt-10 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-lg font-semibold transition hover:scale-105"
+  >
+    ☁️ Launch AWS Expert
+  </button>
+
+</section>
       </section>
 
     </main>

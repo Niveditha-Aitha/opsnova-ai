@@ -1,6 +1,25 @@
-function KubernetesInfo() {
+
+type KubernetesInfoProps = {
+  onLaunch: () => void;
+  onBack: () => void;
+};
+
+function KubernetesInfo({
+  onLaunch,
+  onBack,
+}: KubernetesInfoProps) {
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+
+      <div className="mb-6">
+  <button
+    onClick={onBack}
+    className="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-white transition hover:bg-slate-700"
+  >
+    ← Back to Home
+  </button>
+</div>
       <section className="mx-auto mt-10 max-w-6xl rounded-3xl border border-slate-800 bg-slate-900 p-8">
         <h2 className="text-3xl font-semibold">"Automate. Scale. Heal."</h2>
       </section>
@@ -35,7 +54,12 @@ function KubernetesInfo() {
       <section className="mx-auto mt-16 mb-20 max-w-6xl rounded-3xl border border-blue-500 bg-slate-900 p-10 text-center">
         <h2 className="text-3xl font-bold">Ready to Generate Kubernetes YAML?</h2>
         <p className="mt-5 text-slate-400">Launch the Kubernetes Expert to generate Deployments, Services, ConfigMaps, Secrets, Ingress and HPA manifests.</p>
-        <button className="mt-10 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-lg font-semibold transition hover:scale-105">☸ Launch Kubernetes Expert</button>
+        <button
+  onClick={onLaunch}
+  className="mt-10 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-lg font-semibold transition hover:scale-105"
+>
+  ☸️ Launch Kubernetes Expert
+</button>
       </section>
     </main>
   );

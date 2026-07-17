@@ -1,6 +1,24 @@
-function GitHubActionsInfo() {
+type GitHubActionsInfoProps = {
+  onLaunch: () => void;
+  onBack: () => void;
+};
+
+function GitHubActionsInfo({
+  onLaunch,
+  onBack,
+}: GitHubActionsInfoProps) {
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+
+      <div className="mb-8">
+  <button
+    onClick={onBack}
+    className="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-white transition hover:bg-slate-700"
+  >
+    ← Back to Home
+  </button>
+</div>
 
       {/* Hero */}
 
@@ -248,6 +266,27 @@ function GitHubActionsInfo() {
           </a>
 
         </div>
+
+        {/* Launch */}
+
+<section className="mx-auto mt-16 mb-20 max-w-6xl rounded-3xl border border-blue-500 bg-slate-900 p-10 text-center">
+
+  <h2 className="text-3xl font-bold">
+    Ready to Generate GitHub Actions Workflow?
+  </h2>
+
+  <p className="mt-5 text-slate-400">
+    Launch the GitHub Actions Expert to generate automated CI/CD workflow files for your GitHub repositories.
+  </p>
+
+  <button
+    onClick={onLaunch}
+    className="mt-10 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-lg font-semibold transition hover:scale-105"
+  >
+    ⚙ Launch GitHub Actions Expert
+  </button>
+
+</section>
 
       </section>
 

@@ -16,9 +16,10 @@ import TroubleshooterWorkspace from "../features/troubleshooter/TroubleshooterWo
 type DashboardProps = {
   searchTerm: string;
   onRequireLogin: () => void;
+   onBack: () => void;
 };
 
-function Dashboard({ searchTerm, onRequireLogin }: DashboardProps) {
+function Dashboard({ searchTerm, onRequireLogin ,  onBack, }: DashboardProps) {
   const [selectedExpert, setSelectedExpert] = useState("");
   const filteredExpert = selectedExpert
   .toLowerCase()
@@ -30,6 +31,7 @@ function Dashboard({ searchTerm, onRequireLogin }: DashboardProps) {
       <Sidebar
         selectedExpert={selectedExpert}
         setSelectedExpert={setSelectedExpert}
+        onBack={onBack}
       />
 
       <main className="flex-1 overflow-y-auto bg-slate-950 p-8">
@@ -84,31 +86,54 @@ function Dashboard({ searchTerm, onRequireLogin }: DashboardProps) {
 
         {filteredExpert && selectedExpert === "docker" && <DockerWorkspace
   onRequireLogin={onRequireLogin}
+   onBack={() => setSelectedExpert("")}
 />}
 
-        {filteredExpert && selectedExpert === "kubernetes" && <KubernetesWorkspace onRequireLogin={onRequireLogin} />}
+        {filteredExpert && selectedExpert === "kubernetes" && <KubernetesWorkspace
+  onRequireLogin={onRequireLogin}
+   onBack={() => setSelectedExpert("")}
+/>}
 
-        {filteredExpert && selectedExpert === "jenkins" && <JenkinsWorkspace onRequireLogin={onRequireLogin} />}
 
-        {filteredExpert && selectedExpert === "terraform" && <TerraformWorkspace onRequireLogin={onRequireLogin} />}
+        {filteredExpert && selectedExpert === "jenkins" && <JenkinsWorkspace
+  onRequireLogin={onRequireLogin}
+   onBack={() => setSelectedExpert("")}
+/>}
 
-        {filteredExpert && selectedExpert === "github-actions" && (
-          <GitHubActionsWorkspace onRequireLogin={onRequireLogin} />
-        )}
+        {filteredExpert && selectedExpert === "terraform" && <TerraformWorkspace 
+        onRequireLogin={onRequireLogin}
+        onBack={() => setSelectedExpert("")}
+         />}
 
-        {filteredExpert && selectedExpert === "ansible" && (
-          <AnsibleWorkspace onRequireLogin={onRequireLogin}  />
-        )}
+        {filteredExpert && selectedExpert === "github-actions" && <GitHubActionsWorkspace 
+         onRequireLogin={onRequireLogin}
+          onBack={() => setSelectedExpert("")} 
+          />}
 
-        {filteredExpert && selectedExpert === "aws" && <AwsWorkspace onRequireLogin={onRequireLogin} />}
+        {filteredExpert && selectedExpert === "ansible" && <AnsibleWorkspace 
+         onRequireLogin={onRequireLogin}
+          onBack={() => setSelectedExpert("")} 
+            />}
 
-        {filteredExpert && selectedExpert === "cicd" && <CicdWorkspace onRequireLogin={onRequireLogin}  />}
+        {filteredExpert && selectedExpert === "aws" && <AwsWorkspace 
+        onRequireLogin={onRequireLogin} 
+         onBack={() => setSelectedExpert("")} 
+         />}
 
-        {filteredExpert && selectedExpert === "linux" && <LinuxWorkspace onRequireLogin={onRequireLogin}  />}
+        {filteredExpert && selectedExpert === "cicd" && <CicdWorkspace 
+        onRequireLogin={onRequireLogin}  
+         onBack={() => setSelectedExpert("")} 
+         />}
 
-        {filteredExpert && selectedExpert === "troubleshooter" && (
-          <TroubleshooterWorkspace onRequireLogin={onRequireLogin} />
-        )}
+        {filteredExpert && selectedExpert === "linux" && <LinuxWorkspace 
+        onRequireLogin={onRequireLogin}  
+         onBack={() => setSelectedExpert("")} 
+         />}
+
+        {filteredExpert && selectedExpert === "troubleshooter" && <TroubleshooterWorkspace 
+        onRequireLogin={onRequireLogin} 
+         onBack={() => setSelectedExpert("")} 
+         />}
 
       </main>
 

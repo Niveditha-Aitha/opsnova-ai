@@ -5,6 +5,7 @@ import { useEffect } from "react";
 type SidebarProps = {
   selectedExpert: string;
   setSelectedExpert: React.Dispatch<React.SetStateAction<string>>;
+  onBack: () => void;
 };
 
 const menu = [
@@ -48,6 +49,7 @@ const menu = [
 function Sidebar({
   selectedExpert,
   setSelectedExpert,
+   onBack,
 }: SidebarProps) {
 
   useEffect(() => {
@@ -94,17 +96,14 @@ function Sidebar({
   </p>
 </div>
 
-      {/* Search */}
+      {/* Back button*/}
 
-      <div className="p-5">
-
-        <input
-          type="text"
-          placeholder="🔍 Search expert..."
-          className="w-full rounded-xl bg-slate-900 border border-slate-700 px-4 py-3 outline-none focus:border-blue-500"
-        />
-
-      </div>
+      <button
+  onClick={onBack}
+  className="mb-4 flex w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-3 py-3 text-base font-medium text-white transition hover:bg-slate-700"
+>
+  🏠 HOME
+</button>
 
       {/* Menu */}
 

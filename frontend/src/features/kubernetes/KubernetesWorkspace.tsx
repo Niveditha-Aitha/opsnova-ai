@@ -10,10 +10,12 @@ import KubernetesOutput from "./KubernetesOutput";
 
 type KubernetesWorkspaceProps = {
   onRequireLogin: () => void;
+  onBack: () => void;
 };
 
 function KubernetesWorkspace({
   onRequireLogin,
+  onBack,
 }: KubernetesWorkspaceProps) {
 
   const [loading, setLoading] = useState(false);
@@ -64,6 +66,15 @@ if (!currentUser) {
 
   return (
     <div className="flex-1 p-6 overflow-auto">
+
+        <div className="mb-6">
+  <button
+    onClick={onBack}
+    className="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-white transition hover:bg-slate-700"
+  >
+    ← Back to Kubernetes Expert
+  </button>
+</div>
 
       <h1 className="text-3xl font-bold mb-6">
         Kubernetes Expert

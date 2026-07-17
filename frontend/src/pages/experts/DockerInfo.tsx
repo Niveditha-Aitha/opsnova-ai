@@ -2,15 +2,25 @@
 
 type DockerInfoProps = {
   onLaunch: () => void;
+  onBack: () => void;
 };
 
 function DockerInfo({
   onLaunch,
+  onBack,
 }: DockerInfoProps) {
 
 
  return (
     <main className="min-h-screen bg-slate-950 text-white">
+      <div className="mb-6">
+  <button
+    onClick={onBack}
+    className="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-white transition hover:bg-slate-700"
+  >
+    ← Back to Home
+  </button>
+</div>
 
       {/* Hero */}
 

@@ -13,6 +13,15 @@ import AIChatButton from "./components/chat/AIChatButton";
 import AIChatPanel from "./components/chat/AIChatPanel";
 import GitHub from "./pages/GitHub";
 import DockerWorkspace from "./features/docker/DockerWorkspace";
+import KubernetesWorkspace from "./features/kubernetes/KubernetesWorkspace";
+import JenkinsWorkspace from "./features/jenkins/JenkinsWorkspace";
+import TerraformWorkspace from "./features/terraform/TerraformWorkspace";
+import GitHubActionsWorkspace from "./features/github-actions/GitHubActionsWorkspace";
+import AnsibleWorkspace from "./features/ansible/AnsibleWorkspace";
+import AwsWorkspace from "./features/aws/AwsWorkspace";
+import CicdWorkspace from "./features/cicd/CicdWorkspace";
+import LinuxWorkspace from "./features/linux/LinuxWorkspace";
+import TroubleshooterWorkspace from "./features/troubleshooter/TroubleshooterWorkspace";
 
 import DockerInfo from "./pages/experts/DockerInfo";
 import KubernetesInfo from "./pages/experts/KubernetesInfo";
@@ -145,6 +154,7 @@ function App() {
         <Dashboard
     searchTerm={searchTerm}
     onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("home")}
 />
       )}
     
@@ -155,32 +165,142 @@ function App() {
       {currentPage === "docker-info" && (
   <DockerInfo
     onLaunch={() => setCurrentPage("docker-workspace")}
+    onBack={() => setCurrentPage("home")}
   />
 )}
 
-      {currentPage === "docker-workspace" && (
+{currentPage === "docker-workspace" && (
   <DockerWorkspace
     onRequireLogin={() => setShowLoginModal(true)}
+     onBack={() => setCurrentPage("docker-info")}
   />
 )}
 
-      {currentPage === "kubernetes-info" && <KubernetesInfo />}
+      {currentPage === "kubernetes-workspace" && (
+  <KubernetesWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+     onBack={() => setCurrentPage("kubernetes-info")}
+  />
+)}
 
-      {currentPage === "jenkins-info" && <JenkinsInfo />}
+{currentPage === "kubernetes-info" && (
+  <KubernetesInfo
+    onLaunch={() => setCurrentPage("kubernetes-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
 
-      {currentPage === "terraform-info" && <TerraformInfo />}
+{currentPage === "jenkins-workspace" && (
+  <JenkinsWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("jenkins-info")}
+  />
+)}
 
-      {currentPage === "githubactions-info" && <GitHubActionsInfo />}
+      {currentPage === "jenkins-info" && (
+  <JenkinsInfo
+    onLaunch={() => setCurrentPage("jenkins-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
 
-      {currentPage === "aws-info" && <AwsInfo />}
+{currentPage === "terraform-workspace" && (
+  <TerraformWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("terraform-info")}
+  />
+)}
 
-      {currentPage === "ansible-info" && <AnsibleInfo />}
+    {currentPage === "terraform-info" && (
+  <TerraformInfo
+    onLaunch={() => setCurrentPage("terraform-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
 
-      {currentPage === "cicd-info" && <CicdInfo />}
+{currentPage === "githubactions-workspace" && (
+  <GitHubActionsWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("githubactions-info")}
+  />
+)}
 
-      {currentPage === "linux-info" && <LinuxInfo />}
+{currentPage === "githubactions-info" && (
+  <GitHubActionsInfo
+    onLaunch={() => setCurrentPage("githubactions-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
 
-      {currentPage === "troubleshooter-info" && <TroubleshooterInfo />}
+{currentPage === "ansible-workspace" && (
+  <AnsibleWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("ansible-info")}
+  />
+)}
+
+     {currentPage === "ansible-info" && (
+  <AnsibleInfo
+    onLaunch={() => setCurrentPage("ansible-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
+
+{currentPage === "aws-workspace" && (
+  <AwsWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("aws-info")}
+  />
+)}
+
+{currentPage === "aws-info" && (
+  <AwsInfo
+    onLaunch={() => setCurrentPage("aws-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
+
+{currentPage === "cicd-workspace" && (
+  <CicdWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("cicd-info")}
+  />
+)}
+
+    {currentPage === "cicd-info" && (
+  <CicdInfo
+    onLaunch={() => setCurrentPage("cicd-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
+
+{currentPage === "linux-workspace" && (
+  <LinuxWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("linux-info")}
+  />
+)}
+
+     {currentPage === "linux-info" && (
+  <LinuxInfo
+    onLaunch={() => setCurrentPage("linux-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
+
+{currentPage === "troubleshooter-workspace" && (
+  <TroubleshooterWorkspace
+    onRequireLogin={() => setShowLoginModal(true)}
+    onBack={() => setCurrentPage("troubleshooter-info")}
+  />
+)}
+
+   {currentPage === "troubleshooter-info" && (
+  <TroubleshooterInfo
+    onLaunch={() => setCurrentPage("troubleshooter-workspace")}
+    onBack={() => setCurrentPage("home")}
+  />
+)}
  
      <LoginModal
   isOpen={showLoginModal}
